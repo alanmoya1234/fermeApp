@@ -1,0 +1,2202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CARGO">
+          <Key>
+            <PropertyRef Name="COD_CARGO" />
+          </Key>
+          <Property Name="COD_CARGO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CIUDAD">
+          <Key>
+            <PropertyRef Name="ID_CIUDAD" />
+          </Key>
+          <Property Name="ID_CIUDAD" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="150" Nullable="false" />
+          <Property Name="ID_REGION" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COMUNA">
+          <Key>
+            <PropertyRef Name="ID_COMUNA" />
+          </Key>
+          <Property Name="ID_COMUNA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="150" Nullable="false" />
+          <Property Name="ID_CIUDAD" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CREDENCIAL">
+          <Key>
+            <PropertyRef Name="ID_CREDENCIAL" />
+          </Key>
+          <Property Name="ID_CREDENCIAL" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USUARIO" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="FEC_CADUCIDAD" Type="date" Nullable="false" />
+          <Property Name="ID_STS" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="DET_ORD_COMP">
+          <Key>
+            <PropertyRef Name="ID_DET_ORD_COMP" />
+          </Key>
+          <Property Name="ID_DET_ORD_COMP" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COD_PRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_ORDEN_COMPRA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CANTIDAD" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DETALLE_VENTA">
+          <Key>
+            <PropertyRef Name="ID_DET_VENT" />
+          </Key>
+          <Property Name="ID_DET_VENT" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COD_PRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COD_VENTA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CANTIDAD" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PRECIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DIR_DES_CLI">
+          <Key>
+            <PropertyRef Name="ID_DES" />
+          </Key>
+          <Property Name="ID_DES" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COD_DIR" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DIR_DESPACHO">
+          <Key>
+            <PropertyRef Name="COD_DIR" />
+          </Key>
+          <Property Name="COD_DIR" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="300" Nullable="false" />
+          <Property Name="ID_COMUNA" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="RUT_EMP" />
+          </Key>
+          <Property Name="RUT_EMP" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="RAZON_SOCIAL" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="TELEFONO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="200" />
+          <Property Name="ID_STS" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESTADO">
+          <Key>
+            <PropertyRef Name="ID_STS" />
+          </Key>
+          <Property Name="ID_STS" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FAMILIA_PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID_FAM_PRO" />
+          </Key>
+          <Property Name="ID_FAM_PRO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GENERO">
+          <Key>
+            <PropertyRef Name="ID_GENERO" />
+          </Key>
+          <Property Name="ID_GENERO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ORDEN_COMPRA">
+          <Key>
+            <PropertyRef Name="ID_ORDEN_COMPRA" />
+          </Key>
+          <Property Name="ID_ORDEN_COMPRA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FEC_EMISION" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="COD_PRODUCTO" />
+          </Key>
+          <Property Name="COD_PRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="FEC_VENCIMIENTO" Type="date" Nullable="false" />
+          <Property Name="STOCK" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="STOCK_CRITICO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PRECIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="200" />
+          <Property Name="IMAGEN" Type="blob" />
+          <Property Name="ID_TIP_PROD" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT_EMP" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="ID_STS" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_PROVEEDOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_PROMO" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="PROMOCION">
+          <Key>
+            <PropertyRef Name="ID_PROMO" />
+          </Key>
+          <Property Name="ID_PROMO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NAME_PROMO" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="FEC_INICIO" Type="date" Nullable="false" />
+          <Property Name="FEC_TERMINO" Type="date" Nullable="false" />
+          <Property Name="PORC_DESC" Type="number" Precision="38" Scale="0" />
+          <Property Name="MONTO_PROMO" Type="number" Precision="38" Scale="0" />
+          <Property Name="ID_STS" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROVEEDOR">
+          <Key>
+            <PropertyRef Name="ID_PROVEEDOR" />
+          </Key>
+          <Property Name="ID_PROVEEDOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT_PROVEEDOR" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="RAZON_SOCIAL" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="CELULAR" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="300" Nullable="false" />
+          <Property Name="ID_COMUNA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_STS" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_RUBRO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REGION">
+          <Key>
+            <PropertyRef Name="ID_REGION" />
+          </Key>
+          <Property Name="ID_REGION" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RUBRO">
+          <Key>
+            <PropertyRef Name="ID_RUBRO" />
+          </Key>
+          <Property Name="ID_RUBRO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_COMPROBANTE">
+          <Key>
+            <PropertyRef Name="ID_TIP_COMPR" />
+          </Key>
+          <Property Name="ID_TIP_COMPR" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_ENTREGA">
+          <Key>
+            <PropertyRef Name="ID_TIP_ENTREGA" />
+          </Key>
+          <Property Name="ID_TIP_ENTREGA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_MONEDA">
+          <Key>
+            <PropertyRef Name="ID_TIP_MONEY" />
+          </Key>
+          <Property Name="ID_TIP_MONEY" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="VALOR_PESO_CL" Type="number" Precision="15" Scale="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_PAGO">
+          <Key>
+            <PropertyRef Name="ID_TIP_PAGO" />
+          </Key>
+          <Property Name="ID_TIP_PAGO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID_TIP_PROD" />
+          </Key>
+          <Property Name="ID_TIP_PROD" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="ID_FAM_PRO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_USUARIO">
+          <Key>
+            <PropertyRef Name="ID_TIP_USER" />
+          </Key>
+          <Property Name="ID_TIP_USER" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="RUT" />
+          </Key>
+          <Property Name="RUT" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="NOMBRE_COMPLETO" Type="varchar2" MaxLength="300" Nullable="false" />
+          <Property Name="TELEFONO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DIRECCION" Type="varchar2" MaxLength="300" Nullable="false" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="150" />
+          <Property Name="RAZON_SOCIAL" Type="varchar2" MaxLength="50" />
+          <Property Name="FEC_NAC" Type="date" />
+          <Property Name="FEC_CONTRATO" Type="date" />
+          <Property Name="SUELDO" Type="number" Precision="38" Scale="0" />
+          <Property Name="ID_COMUNA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT_EMP" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="ID_STS" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_RUBRO" Type="number" Precision="38" Scale="0" />
+          <Property Name="ID_GENERO" Type="number" Precision="38" Scale="0" />
+          <Property Name="COD_CARGO" Type="number" Precision="38" Scale="0" />
+          <Property Name="ID_TIP_USER" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO_VENTA">
+          <Key>
+            <PropertyRef Name="ID_US_VEN" />
+          </Key>
+          <Property Name="ID_US_VEN" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="COD_VENTA" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VENT_TIP_PAGO">
+          <Key>
+            <PropertyRef Name="ID_V_TIP_PAGO" />
+          </Key>
+          <Property Name="ID_V_TIP_PAGO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COD_VENTA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_TIP_PAGO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VENTA">
+          <Key>
+            <PropertyRef Name="COD_VENTA" />
+          </Key>
+          <Property Name="COD_VENTA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TOTAL" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FEC_VENTA" Type="date" Nullable="false" />
+          <Property Name="ID_TIP_ENTREGA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_TIP_COMPR" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_TIP_MONEY" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT_EMP" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="COD_DIR" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <Association Name="CIU_REG_FK">
+          <End Role="REGION" Type="Self.REGION" Multiplicity="1" />
+          <End Role="CIUDAD" Type="Self.CIUDAD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REGION">
+              <PropertyRef Name="ID_REGION" />
+            </Principal>
+            <Dependent Role="CIUDAD">
+              <PropertyRef Name="ID_REGION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COMU_CIUD_FK">
+          <End Role="CIUDAD" Type="Self.CIUDAD" Multiplicity="1" />
+          <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CIUDAD">
+              <PropertyRef Name="ID_CIUDAD" />
+            </Principal>
+            <Dependent Role="COMUNA">
+              <PropertyRef Name="ID_CIUDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CREDENCIAL_ESTADO_FK">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="CREDENCIAL" Type="Self.CREDENCIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_STS" />
+            </Principal>
+            <Dependent Role="CREDENCIAL">
+              <PropertyRef Name="ID_STS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CREDENCIAL_USUARIO_FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CREDENCIAL" Type="Self.CREDENCIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="RUT" />
+            </Principal>
+            <Dependent Role="CREDENCIAL">
+              <PropertyRef Name="RUT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DET_ORD_COMP_ORD_COMP_FK">
+          <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="1" />
+          <End Role="DET_ORD_COMP" Type="Self.DET_ORD_COMP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_COMPRA">
+              <PropertyRef Name="ID_ORDEN_COMPRA" />
+            </Principal>
+            <Dependent Role="DET_ORD_COMP">
+              <PropertyRef Name="ID_ORDEN_COMPRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DET_ORD_COMP_PROD_FK">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="DET_ORD_COMP" Type="Self.DET_ORD_COMP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="COD_PRODUCTO" />
+            </Principal>
+            <Dependent Role="DET_ORD_COMP">
+              <PropertyRef Name="COD_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DET_VEN_PRODU_FK">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="COD_PRODUCTO" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="COD_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DET_VEN_VEN_FK">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1" />
+          <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="COD_VENTA" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="COD_VENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DIR_DES_CLI_DIR_DESP_FK">
+          <End Role="DIR_DESPACHO" Type="Self.DIR_DESPACHO" Multiplicity="1" />
+          <End Role="DIR_DES_CLI" Type="Self.DIR_DES_CLI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIR_DESPACHO">
+              <PropertyRef Name="COD_DIR" />
+            </Principal>
+            <Dependent Role="DIR_DES_CLI">
+              <PropertyRef Name="COD_DIR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DIR_DES_CLI_US_FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="DIR_DES_CLI" Type="Self.DIR_DES_CLI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="RUT" />
+            </Principal>
+            <Dependent Role="DIR_DES_CLI">
+              <PropertyRef Name="RUT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DIR_DESPACHO_COMUNA_FK">
+          <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="1" />
+          <End Role="DIR_DESPACHO" Type="Self.DIR_DESPACHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMUNA">
+              <PropertyRef Name="ID_COMUNA" />
+            </Principal>
+            <Dependent Role="DIR_DESPACHO">
+              <PropertyRef Name="ID_COMUNA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPRESA_ESTADO_FK">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_STS" />
+            </Principal>
+            <Dependent Role="EMPRESA">
+              <PropertyRef Name="ID_STS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCTO_EMPRESA_FK">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="RUT_EMP" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="RUT_EMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCTO_ESTADO_FK">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_STS" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ID_STS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCTO_PROMOCION_FK">
+          <End Role="PROMOCION" Type="Self.PROMOCION" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROMOCION">
+              <PropertyRef Name="ID_PROMO" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ID_PROMO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCTO_PROVEEDOR_FK">
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCTO_TIPO_PRODUCTO_FK">
+          <End Role="TIPO_PRODUCTO" Type="Self.TIPO_PRODUCTO" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PRODUCTO">
+              <PropertyRef Name="ID_TIP_PROD" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ID_TIP_PROD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROMOCION_ESTADO_FK">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="PROMOCION" Type="Self.PROMOCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_STS" />
+            </Principal>
+            <Dependent Role="PROMOCION">
+              <PropertyRef Name="ID_STS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROVE_COM_FK">
+          <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="1" />
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMUNA">
+              <PropertyRef Name="ID_COMUNA" />
+            </Principal>
+            <Dependent Role="PROVEEDOR">
+              <PropertyRef Name="ID_COMUNA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROVE_EST_FK">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_STS" />
+            </Principal>
+            <Dependent Role="PROVEEDOR">
+              <PropertyRef Name="ID_STS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROVE_RUB_FK">
+          <End Role="RUBRO" Type="Self.RUBRO" Multiplicity="1" />
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RUBRO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Principal>
+            <Dependent Role="PROVEEDOR">
+              <PropertyRef Name="ID_RUBRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TIP_PROD_FAM_PROD_FK">
+          <End Role="FAMILIA_PRODUCTO" Type="Self.FAMILIA_PRODUCTO" Multiplicity="1" />
+          <End Role="TIPO_PRODUCTO" Type="Self.TIPO_PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FAMILIA_PRODUCTO">
+              <PropertyRef Name="ID_FAM_PRO" />
+            </Principal>
+            <Dependent Role="TIPO_PRODUCTO">
+              <PropertyRef Name="ID_FAM_PRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_CARGO_FK">
+          <End Role="CARGO" Type="Self.CARGO" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGO">
+              <PropertyRef Name="COD_CARGO" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="COD_CARGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_COMUNA_FK">
+          <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMUNA">
+              <PropertyRef Name="ID_COMUNA" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_COMUNA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_EMPRESA_FK">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="RUT_EMP" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="RUT_EMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_ESTADO_FK">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_STS" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_STS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_GENERO_FK">
+          <End Role="GENERO" Type="Self.GENERO" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENERO">
+              <PropertyRef Name="ID_GENERO" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_GENERO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_RUBRO_FK">
+          <End Role="RUBRO" Type="Self.RUBRO" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RUBRO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_TIPO_USUARIO_FK">
+          <End Role="TIPO_USUARIO" Type="Self.TIPO_USUARIO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_USUARIO">
+              <PropertyRef Name="ID_TIP_USER" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_TIP_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_VEN_US_FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="USUARIO_VENTA" Type="Self.USUARIO_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="RUT" />
+            </Principal>
+            <Dependent Role="USUARIO_VENTA">
+              <PropertyRef Name="RUT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_VEN_VEN_FK">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1" />
+          <End Role="USUARIO_VENTA" Type="Self.USUARIO_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="COD_VENTA" />
+            </Principal>
+            <Dependent Role="USUARIO_VENTA">
+              <PropertyRef Name="COD_VENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VEN_DIR_DESP_FK">
+          <End Role="DIR_DESPACHO" Type="Self.DIR_DESPACHO" Multiplicity="0..1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIR_DESPACHO">
+              <PropertyRef Name="COD_DIR" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="COD_DIR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VEN_EMPR_FK">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="RUT_EMP" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="RUT_EMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VEN_TIP_COMPR_FK">
+          <End Role="TIPO_COMPROBANTE" Type="Self.TIPO_COMPROBANTE" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_COMPROBANTE">
+              <PropertyRef Name="ID_TIP_COMPR" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="ID_TIP_COMPR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VEN_TIP_ENT_FK">
+          <End Role="TIPO_ENTREGA" Type="Self.TIPO_ENTREGA" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_ENTREGA">
+              <PropertyRef Name="ID_TIP_ENTREGA" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="ID_TIP_ENTREGA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VEN_TIP_MON_FK">
+          <End Role="TIPO_MONEDA" Type="Self.TIPO_MONEDA" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_MONEDA">
+              <PropertyRef Name="ID_TIP_MONEY" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="ID_TIP_MONEY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VENT_TIP_PAGO_TIPO_PAGO_FK">
+          <End Role="TIPO_PAGO" Type="Self.TIPO_PAGO" Multiplicity="1" />
+          <End Role="VENT_TIP_PAGO" Type="Self.VENT_TIP_PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PAGO">
+              <PropertyRef Name="ID_TIP_PAGO" />
+            </Principal>
+            <Dependent Role="VENT_TIP_PAGO">
+              <PropertyRef Name="ID_TIP_PAGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VENT_TIP_PAGO_VENTA_FK">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1" />
+          <End Role="VENT_TIP_PAGO" Type="Self.VENT_TIP_PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="COD_VENTA" />
+            </Principal>
+            <Dependent Role="VENT_TIP_PAGO">
+              <PropertyRef Name="COD_VENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="CARGO" EntityType="Self.CARGO" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="CIUDAD" EntityType="Self.CIUDAD" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="COMUNA" EntityType="Self.COMUNA" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="CREDENCIAL" EntityType="Self.CREDENCIAL" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="DET_ORD_COMP" EntityType="Self.DET_ORD_COMP" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="DETALLE_VENTA" EntityType="Self.DETALLE_VENTA" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="DIR_DES_CLI" EntityType="Self.DIR_DES_CLI" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="DIR_DESPACHO" EntityType="Self.DIR_DESPACHO" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="FAMILIA_PRODUCTO" EntityType="Self.FAMILIA_PRODUCTO" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="GENERO" EntityType="Self.GENERO" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="ORDEN_COMPRA" EntityType="Self.ORDEN_COMPRA" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="PROMOCION" EntityType="Self.PROMOCION" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="REGION" EntityType="Self.REGION" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="RUBRO" EntityType="Self.RUBRO" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="TIPO_COMPROBANTE" EntityType="Self.TIPO_COMPROBANTE" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="TIPO_ENTREGA" EntityType="Self.TIPO_ENTREGA" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="TIPO_MONEDA" EntityType="Self.TIPO_MONEDA" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="TIPO_PAGO" EntityType="Self.TIPO_PAGO" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="TIPO_PRODUCTO" EntityType="Self.TIPO_PRODUCTO" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="TIPO_USUARIO" EntityType="Self.TIPO_USUARIO" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="USUARIO_VENTA" EntityType="Self.USUARIO_VENTA" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="VENT_TIP_PAGO" EntityType="Self.VENT_TIP_PAGO" Schema="FERMEBD" store:Type="Tables" />
+          <EntitySet Name="VENTA" EntityType="Self.VENTA" Schema="FERMEBD" store:Type="Tables" />
+          <AssociationSet Name="CIU_REG_FK" Association="Self.CIU_REG_FK">
+            <End Role="REGION" EntitySet="REGION" />
+            <End Role="CIUDAD" EntitySet="CIUDAD" />
+          </AssociationSet>
+          <AssociationSet Name="COMU_CIUD_FK" Association="Self.COMU_CIUD_FK">
+            <End Role="CIUDAD" EntitySet="CIUDAD" />
+            <End Role="COMUNA" EntitySet="COMUNA" />
+          </AssociationSet>
+          <AssociationSet Name="CREDENCIAL_ESTADO_FK" Association="Self.CREDENCIAL_ESTADO_FK">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="CREDENCIAL" EntitySet="CREDENCIAL" />
+          </AssociationSet>
+          <AssociationSet Name="CREDENCIAL_USUARIO_FK" Association="Self.CREDENCIAL_USUARIO_FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CREDENCIAL" EntitySet="CREDENCIAL" />
+          </AssociationSet>
+          <AssociationSet Name="DET_ORD_COMP_ORD_COMP_FK" Association="Self.DET_ORD_COMP_ORD_COMP_FK">
+            <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+            <End Role="DET_ORD_COMP" EntitySet="DET_ORD_COMP" />
+          </AssociationSet>
+          <AssociationSet Name="DET_ORD_COMP_PROD_FK" Association="Self.DET_ORD_COMP_PROD_FK">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="DET_ORD_COMP" EntitySet="DET_ORD_COMP" />
+          </AssociationSet>
+          <AssociationSet Name="DET_VEN_PRODU_FK" Association="Self.DET_VEN_PRODU_FK">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="DET_VEN_VEN_FK" Association="Self.DET_VEN_VEN_FK">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="DIR_DES_CLI_DIR_DESP_FK" Association="Self.DIR_DES_CLI_DIR_DESP_FK">
+            <End Role="DIR_DESPACHO" EntitySet="DIR_DESPACHO" />
+            <End Role="DIR_DES_CLI" EntitySet="DIR_DES_CLI" />
+          </AssociationSet>
+          <AssociationSet Name="DIR_DES_CLI_US_FK" Association="Self.DIR_DES_CLI_US_FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="DIR_DES_CLI" EntitySet="DIR_DES_CLI" />
+          </AssociationSet>
+          <AssociationSet Name="DIR_DESPACHO_COMUNA_FK" Association="Self.DIR_DESPACHO_COMUNA_FK">
+            <End Role="COMUNA" EntitySet="COMUNA" />
+            <End Role="DIR_DESPACHO" EntitySet="DIR_DESPACHO" />
+          </AssociationSet>
+          <AssociationSet Name="EMPRESA_ESTADO_FK" Association="Self.EMPRESA_ESTADO_FK">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCTO_EMPRESA_FK" Association="Self.PRODUCTO_EMPRESA_FK">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCTO_ESTADO_FK" Association="Self.PRODUCTO_ESTADO_FK">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCTO_PROMOCION_FK" Association="Self.PRODUCTO_PROMOCION_FK">
+            <End Role="PROMOCION" EntitySet="PROMOCION" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCTO_PROVEEDOR_FK" Association="Self.PRODUCTO_PROVEEDOR_FK">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCTO_TIPO_PRODUCTO_FK" Association="Self.PRODUCTO_TIPO_PRODUCTO_FK">
+            <End Role="TIPO_PRODUCTO" EntitySet="TIPO_PRODUCTO" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="PROMOCION_ESTADO_FK" Association="Self.PROMOCION_ESTADO_FK">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="PROMOCION" EntitySet="PROMOCION" />
+          </AssociationSet>
+          <AssociationSet Name="PROVE_COM_FK" Association="Self.PROVE_COM_FK">
+            <End Role="COMUNA" EntitySet="COMUNA" />
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="PROVE_EST_FK" Association="Self.PROVE_EST_FK">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="PROVE_RUB_FK" Association="Self.PROVE_RUB_FK">
+            <End Role="RUBRO" EntitySet="RUBRO" />
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="TIP_PROD_FAM_PROD_FK" Association="Self.TIP_PROD_FAM_PROD_FK">
+            <End Role="FAMILIA_PRODUCTO" EntitySet="FAMILIA_PRODUCTO" />
+            <End Role="TIPO_PRODUCTO" EntitySet="TIPO_PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="US_CARGO_FK" Association="Self.US_CARGO_FK">
+            <End Role="CARGO" EntitySet="CARGO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="US_COMUNA_FK" Association="Self.US_COMUNA_FK">
+            <End Role="COMUNA" EntitySet="COMUNA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="US_EMPRESA_FK" Association="Self.US_EMPRESA_FK">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="US_ESTADO_FK" Association="Self.US_ESTADO_FK">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="US_GENERO_FK" Association="Self.US_GENERO_FK">
+            <End Role="GENERO" EntitySet="GENERO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="US_RUBRO_FK" Association="Self.US_RUBRO_FK">
+            <End Role="RUBRO" EntitySet="RUBRO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="US_TIPO_USUARIO_FK" Association="Self.US_TIPO_USUARIO_FK">
+            <End Role="TIPO_USUARIO" EntitySet="TIPO_USUARIO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="US_VEN_US_FK" Association="Self.US_VEN_US_FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="USUARIO_VENTA" EntitySet="USUARIO_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="US_VEN_VEN_FK" Association="Self.US_VEN_VEN_FK">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="USUARIO_VENTA" EntitySet="USUARIO_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="VEN_DIR_DESP_FK" Association="Self.VEN_DIR_DESP_FK">
+            <End Role="DIR_DESPACHO" EntitySet="DIR_DESPACHO" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="VEN_EMPR_FK" Association="Self.VEN_EMPR_FK">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="VEN_TIP_COMPR_FK" Association="Self.VEN_TIP_COMPR_FK">
+            <End Role="TIPO_COMPROBANTE" EntitySet="TIPO_COMPROBANTE" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="VEN_TIP_ENT_FK" Association="Self.VEN_TIP_ENT_FK">
+            <End Role="TIPO_ENTREGA" EntitySet="TIPO_ENTREGA" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="VEN_TIP_MON_FK" Association="Self.VEN_TIP_MON_FK">
+            <End Role="TIPO_MONEDA" EntitySet="TIPO_MONEDA" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="VENT_TIP_PAGO_TIPO_PAGO_FK" Association="Self.VENT_TIP_PAGO_TIPO_PAGO_FK">
+            <End Role="TIPO_PAGO" EntitySet="TIPO_PAGO" />
+            <End Role="VENT_TIP_PAGO" EntitySet="VENT_TIP_PAGO" />
+          </AssociationSet>
+          <AssociationSet Name="VENT_TIP_PAGO_VENTA_FK" Association="Self.VENT_TIP_PAGO_VENTA_FK">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="VENT_TIP_PAGO" EntitySet="VENT_TIP_PAGO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CARGO">
+          <Key>
+            <PropertyRef Name="COD_CARGO" />
+          </Key>
+          <Property Name="COD_CARGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.US_CARGO_FK" FromRole="CARGO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="CIUDAD">
+          <Key>
+            <PropertyRef Name="ID_CIUDAD" />
+          </Key>
+          <Property Name="ID_CIUDAD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_REGION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="REGION" Relationship="Self.CIU_REG_FK" FromRole="CIUDAD" ToRole="REGION" />
+          <NavigationProperty Name="COMUNA" Relationship="Self.COMU_CIUD_FK" FromRole="CIUDAD" ToRole="COMUNA" />
+        </EntityType>
+        <EntityType Name="COMUNA">
+          <Key>
+            <PropertyRef Name="ID_COMUNA" />
+          </Key>
+          <Property Name="ID_COMUNA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_CIUDAD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="CIUDAD" Relationship="Self.COMU_CIUD_FK" FromRole="COMUNA" ToRole="CIUDAD" />
+          <NavigationProperty Name="DIR_DESPACHO" Relationship="Self.DIR_DESPACHO_COMUNA_FK" FromRole="COMUNA" ToRole="DIR_DESPACHO" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Self.PROVE_COM_FK" FromRole="COMUNA" ToRole="PROVEEDOR" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.US_COMUNA_FK" FromRole="COMUNA" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="CREDENCIAL">
+          <Key>
+            <PropertyRef Name="ID_CREDENCIAL" />
+          </Key>
+          <Property Name="ID_CREDENCIAL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USUARIO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FEC_CADUCIDAD" Type="DateTime" Nullable="false" />
+          <Property Name="ID_STS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ESTADO" Relationship="Self.CREDENCIAL_ESTADO_FK" FromRole="CREDENCIAL" ToRole="ESTADO" />
+          <NavigationProperty Name="USUARIO1" Relationship="Self.CREDENCIAL_USUARIO_FK" FromRole="CREDENCIAL" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="DET_ORD_COMP">
+          <Key>
+            <PropertyRef Name="ID_DET_ORD_COMP" />
+          </Key>
+          <Property Name="ID_DET_ORD_COMP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COD_PRODUCTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_ORDEN_COMPRA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CANTIDAD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ORDEN_COMPRA" Relationship="Self.DET_ORD_COMP_ORD_COMP_FK" FromRole="DET_ORD_COMP" ToRole="ORDEN_COMPRA" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.DET_ORD_COMP_PROD_FK" FromRole="DET_ORD_COMP" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="DETALLE_VENTA">
+          <Key>
+            <PropertyRef Name="ID_DET_VENT" />
+          </Key>
+          <Property Name="ID_DET_VENT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COD_PRODUCTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COD_VENTA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CANTIDAD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PRECIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.DET_VEN_PRODU_FK" FromRole="DETALLE_VENTA" ToRole="PRODUCTO" />
+          <NavigationProperty Name="VENTA" Relationship="Self.DET_VEN_VEN_FK" FromRole="DETALLE_VENTA" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="DIR_DES_CLI">
+          <Key>
+            <PropertyRef Name="ID_DES" />
+          </Key>
+          <Property Name="ID_DES" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COD_DIR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DIR_DESPACHO" Relationship="Self.DIR_DES_CLI_DIR_DESP_FK" FromRole="DIR_DES_CLI" ToRole="DIR_DESPACHO" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.DIR_DES_CLI_US_FK" FromRole="DIR_DES_CLI" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="DIR_DESPACHO">
+          <Key>
+            <PropertyRef Name="COD_DIR" />
+          </Key>
+          <Property Name="COD_DIR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_COMUNA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="COMUNA" Relationship="Self.DIR_DESPACHO_COMUNA_FK" FromRole="DIR_DESPACHO" ToRole="COMUNA" />
+          <NavigationProperty Name="DIR_DES_CLI" Relationship="Self.DIR_DES_CLI_DIR_DESP_FK" FromRole="DIR_DESPACHO" ToRole="DIR_DES_CLI" />
+          <NavigationProperty Name="VENTA" Relationship="Self.VEN_DIR_DESP_FK" FromRole="DIR_DESPACHO" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="RUT_EMP" />
+          </Key>
+          <Property Name="RUT_EMP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RAZON_SOCIAL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CORREO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID_STS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ESTADO" Relationship="Self.EMPRESA_ESTADO_FK" FromRole="EMPRESA" ToRole="ESTADO" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODUCTO_EMPRESA_FK" FromRole="EMPRESA" ToRole="PRODUCTO" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.US_EMPRESA_FK" FromRole="EMPRESA" ToRole="USUARIO" />
+          <NavigationProperty Name="VENTA" Relationship="Self.VEN_EMPR_FK" FromRole="EMPRESA" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="ESTADO">
+          <Key>
+            <PropertyRef Name="ID_STS" />
+          </Key>
+          <Property Name="ID_STS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CREDENCIAL" Relationship="Self.CREDENCIAL_ESTADO_FK" FromRole="ESTADO" ToRole="CREDENCIAL" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.EMPRESA_ESTADO_FK" FromRole="ESTADO" ToRole="EMPRESA" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODUCTO_ESTADO_FK" FromRole="ESTADO" ToRole="PRODUCTO" />
+          <NavigationProperty Name="PROMOCION" Relationship="Self.PROMOCION_ESTADO_FK" FromRole="ESTADO" ToRole="PROMOCION" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Self.PROVE_EST_FK" FromRole="ESTADO" ToRole="PROVEEDOR" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.US_ESTADO_FK" FromRole="ESTADO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="FAMILIA_PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID_FAM_PRO" />
+          </Key>
+          <Property Name="ID_FAM_PRO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TIPO_PRODUCTO" Relationship="Self.TIP_PROD_FAM_PROD_FK" FromRole="FAMILIA_PRODUCTO" ToRole="TIPO_PRODUCTO" />
+        </EntityType>
+        <EntityType Name="GENERO">
+          <Key>
+            <PropertyRef Name="ID_GENERO" />
+          </Key>
+          <Property Name="ID_GENERO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.US_GENERO_FK" FromRole="GENERO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="ORDEN_COMPRA">
+          <Key>
+            <PropertyRef Name="ID_ORDEN_COMPRA" />
+          </Key>
+          <Property Name="ID_ORDEN_COMPRA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FEC_EMISION" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="DET_ORD_COMP" Relationship="Self.DET_ORD_COMP_ORD_COMP_FK" FromRole="ORDEN_COMPRA" ToRole="DET_ORD_COMP" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="COD_PRODUCTO" />
+          </Key>
+          <Property Name="COD_PRODUCTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FEC_VENCIMIENTO" Type="DateTime" Nullable="false" />
+          <Property Name="STOCK" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="STOCK_CRITICO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PRECIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IMAGEN" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ID_TIP_PROD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT_EMP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_STS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_PROVEEDOR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_PROMO" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="DET_ORD_COMP" Relationship="Self.DET_ORD_COMP_PROD_FK" FromRole="PRODUCTO" ToRole="DET_ORD_COMP" />
+          <NavigationProperty Name="DETALLE_VENTA" Relationship="Self.DET_VEN_PRODU_FK" FromRole="PRODUCTO" ToRole="DETALLE_VENTA" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.PRODUCTO_EMPRESA_FK" FromRole="PRODUCTO" ToRole="EMPRESA" />
+          <NavigationProperty Name="ESTADO" Relationship="Self.PRODUCTO_ESTADO_FK" FromRole="PRODUCTO" ToRole="ESTADO" />
+          <NavigationProperty Name="PROMOCION" Relationship="Self.PRODUCTO_PROMOCION_FK" FromRole="PRODUCTO" ToRole="PROMOCION" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Self.PRODUCTO_PROVEEDOR_FK" FromRole="PRODUCTO" ToRole="PROVEEDOR" />
+          <NavigationProperty Name="TIPO_PRODUCTO" Relationship="Self.PRODUCTO_TIPO_PRODUCTO_FK" FromRole="PRODUCTO" ToRole="TIPO_PRODUCTO" />
+        </EntityType>
+        <EntityType Name="PROMOCION">
+          <Key>
+            <PropertyRef Name="ID_PROMO" />
+          </Key>
+          <Property Name="ID_PROMO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NAME_PROMO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FEC_INICIO" Type="DateTime" Nullable="false" />
+          <Property Name="FEC_TERMINO" Type="DateTime" Nullable="false" />
+          <Property Name="PORC_DESC" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="MONTO_PROMO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ID_STS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ESTADO" Relationship="Self.PROMOCION_ESTADO_FK" FromRole="PROMOCION" ToRole="ESTADO" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODUCTO_PROMOCION_FK" FromRole="PROMOCION" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="PROVEEDOR">
+          <Key>
+            <PropertyRef Name="ID_PROVEEDOR" />
+          </Key>
+          <Property Name="ID_PROVEEDOR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT_PROVEEDOR" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RAZON_SOCIAL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CELULAR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CORREO" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_COMUNA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_STS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_RUBRO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="COMUNA" Relationship="Self.PROVE_COM_FK" FromRole="PROVEEDOR" ToRole="COMUNA" />
+          <NavigationProperty Name="ESTADO" Relationship="Self.PROVE_EST_FK" FromRole="PROVEEDOR" ToRole="ESTADO" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODUCTO_PROVEEDOR_FK" FromRole="PROVEEDOR" ToRole="PRODUCTO" />
+          <NavigationProperty Name="RUBRO" Relationship="Self.PROVE_RUB_FK" FromRole="PROVEEDOR" ToRole="RUBRO" />
+        </EntityType>
+        <EntityType Name="REGION">
+          <Key>
+            <PropertyRef Name="ID_REGION" />
+          </Key>
+          <Property Name="ID_REGION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CIUDAD" Relationship="Self.CIU_REG_FK" FromRole="REGION" ToRole="CIUDAD" />
+        </EntityType>
+        <EntityType Name="RUBRO">
+          <Key>
+            <PropertyRef Name="ID_RUBRO" />
+          </Key>
+          <Property Name="ID_RUBRO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Self.PROVE_RUB_FK" FromRole="RUBRO" ToRole="PROVEEDOR" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.US_RUBRO_FK" FromRole="RUBRO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="TIPO_COMPROBANTE">
+          <Key>
+            <PropertyRef Name="ID_TIP_COMPR" />
+          </Key>
+          <Property Name="ID_TIP_COMPR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="VENTA" Relationship="Self.VEN_TIP_COMPR_FK" FromRole="TIPO_COMPROBANTE" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="TIPO_ENTREGA">
+          <Key>
+            <PropertyRef Name="ID_TIP_ENTREGA" />
+          </Key>
+          <Property Name="ID_TIP_ENTREGA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="VENTA" Relationship="Self.VEN_TIP_ENT_FK" FromRole="TIPO_ENTREGA" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="TIPO_MONEDA">
+          <Key>
+            <PropertyRef Name="ID_TIP_MONEY" />
+          </Key>
+          <Property Name="ID_TIP_MONEY" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VALOR_PESO_CL" Type="Decimal" Precision="15" Scale="5" Nullable="false" />
+          <NavigationProperty Name="VENTA" Relationship="Self.VEN_TIP_MON_FK" FromRole="TIPO_MONEDA" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="TIPO_PAGO">
+          <Key>
+            <PropertyRef Name="ID_TIP_PAGO" />
+          </Key>
+          <Property Name="ID_TIP_PAGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="VENT_TIP_PAGO" Relationship="Self.VENT_TIP_PAGO_TIPO_PAGO_FK" FromRole="TIPO_PAGO" ToRole="VENT_TIP_PAGO" />
+        </EntityType>
+        <EntityType Name="TIPO_PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID_TIP_PROD" />
+          </Key>
+          <Property Name="ID_TIP_PROD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_FAM_PRO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="FAMILIA_PRODUCTO" Relationship="Self.TIP_PROD_FAM_PROD_FK" FromRole="TIPO_PRODUCTO" ToRole="FAMILIA_PRODUCTO" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODUCTO_TIPO_PRODUCTO_FK" FromRole="TIPO_PRODUCTO" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="TIPO_USUARIO">
+          <Key>
+            <PropertyRef Name="ID_TIP_USER" />
+          </Key>
+          <Property Name="ID_TIP_USER" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.US_TIPO_USUARIO_FK" FromRole="TIPO_USUARIO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="RUT" />
+          </Key>
+          <Property Name="RUT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE_COMPLETO" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CORREO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="RAZON_SOCIAL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FEC_NAC" Type="DateTime" />
+          <Property Name="FEC_CONTRATO" Type="DateTime" />
+          <Property Name="SUELDO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ID_COMUNA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT_EMP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_STS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_RUBRO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ID_GENERO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COD_CARGO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ID_TIP_USER" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="CARGO" Relationship="Self.US_CARGO_FK" FromRole="USUARIO" ToRole="CARGO" />
+          <NavigationProperty Name="COMUNA" Relationship="Self.US_COMUNA_FK" FromRole="USUARIO" ToRole="COMUNA" />
+          <NavigationProperty Name="CREDENCIAL" Relationship="Self.CREDENCIAL_USUARIO_FK" FromRole="USUARIO" ToRole="CREDENCIAL" />
+          <NavigationProperty Name="DIR_DES_CLI" Relationship="Self.DIR_DES_CLI_US_FK" FromRole="USUARIO" ToRole="DIR_DES_CLI" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.US_EMPRESA_FK" FromRole="USUARIO" ToRole="EMPRESA" />
+          <NavigationProperty Name="ESTADO" Relationship="Self.US_ESTADO_FK" FromRole="USUARIO" ToRole="ESTADO" />
+          <NavigationProperty Name="GENERO" Relationship="Self.US_GENERO_FK" FromRole="USUARIO" ToRole="GENERO" />
+          <NavigationProperty Name="RUBRO" Relationship="Self.US_RUBRO_FK" FromRole="USUARIO" ToRole="RUBRO" />
+          <NavigationProperty Name="TIPO_USUARIO" Relationship="Self.US_TIPO_USUARIO_FK" FromRole="USUARIO" ToRole="TIPO_USUARIO" />
+          <NavigationProperty Name="USUARIO_VENTA" Relationship="Self.US_VEN_US_FK" FromRole="USUARIO" ToRole="USUARIO_VENTA" />
+        </EntityType>
+        <EntityType Name="USUARIO_VENTA">
+          <Key>
+            <PropertyRef Name="ID_US_VEN" />
+          </Key>
+          <Property Name="ID_US_VEN" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COD_VENTA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.US_VEN_US_FK" FromRole="USUARIO_VENTA" ToRole="USUARIO" />
+          <NavigationProperty Name="VENTA" Relationship="Self.US_VEN_VEN_FK" FromRole="USUARIO_VENTA" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="VENT_TIP_PAGO">
+          <Key>
+            <PropertyRef Name="ID_V_TIP_PAGO" />
+          </Key>
+          <Property Name="ID_V_TIP_PAGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COD_VENTA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_TIP_PAGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="TIPO_PAGO" Relationship="Self.VENT_TIP_PAGO_TIPO_PAGO_FK" FromRole="VENT_TIP_PAGO" ToRole="TIPO_PAGO" />
+          <NavigationProperty Name="VENTA" Relationship="Self.VENT_TIP_PAGO_VENTA_FK" FromRole="VENT_TIP_PAGO" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="VENTA">
+          <Key>
+            <PropertyRef Name="COD_VENTA" />
+          </Key>
+          <Property Name="COD_VENTA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TOTAL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FEC_VENTA" Type="DateTime" Nullable="false" />
+          <Property Name="ID_TIP_ENTREGA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_TIP_COMPR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_TIP_MONEY" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT_EMP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COD_DIR" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="DETALLE_VENTA" Relationship="Self.DET_VEN_VEN_FK" FromRole="VENTA" ToRole="DETALLE_VENTA" />
+          <NavigationProperty Name="DIR_DESPACHO" Relationship="Self.VEN_DIR_DESP_FK" FromRole="VENTA" ToRole="DIR_DESPACHO" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.VEN_EMPR_FK" FromRole="VENTA" ToRole="EMPRESA" />
+          <NavigationProperty Name="TIPO_COMPROBANTE" Relationship="Self.VEN_TIP_COMPR_FK" FromRole="VENTA" ToRole="TIPO_COMPROBANTE" />
+          <NavigationProperty Name="TIPO_ENTREGA" Relationship="Self.VEN_TIP_ENT_FK" FromRole="VENTA" ToRole="TIPO_ENTREGA" />
+          <NavigationProperty Name="TIPO_MONEDA" Relationship="Self.VEN_TIP_MON_FK" FromRole="VENTA" ToRole="TIPO_MONEDA" />
+          <NavigationProperty Name="USUARIO_VENTA" Relationship="Self.US_VEN_VEN_FK" FromRole="VENTA" ToRole="USUARIO_VENTA" />
+          <NavigationProperty Name="VENT_TIP_PAGO" Relationship="Self.VENT_TIP_PAGO_VENTA_FK" FromRole="VENTA" ToRole="VENT_TIP_PAGO" />
+        </EntityType>
+        <Association Name="US_CARGO_FK">
+          <End Role="CARGO" Type="Self.CARGO" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGO">
+              <PropertyRef Name="COD_CARGO" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="COD_CARGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CIU_REG_FK">
+          <End Role="REGION" Type="Self.REGION" Multiplicity="1" />
+          <End Role="CIUDAD" Type="Self.CIUDAD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REGION">
+              <PropertyRef Name="ID_REGION" />
+            </Principal>
+            <Dependent Role="CIUDAD">
+              <PropertyRef Name="ID_REGION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COMU_CIUD_FK">
+          <End Role="CIUDAD" Type="Self.CIUDAD" Multiplicity="1" />
+          <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CIUDAD">
+              <PropertyRef Name="ID_CIUDAD" />
+            </Principal>
+            <Dependent Role="COMUNA">
+              <PropertyRef Name="ID_CIUDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DIR_DESPACHO_COMUNA_FK">
+          <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="1" />
+          <End Role="DIR_DESPACHO" Type="Self.DIR_DESPACHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMUNA">
+              <PropertyRef Name="ID_COMUNA" />
+            </Principal>
+            <Dependent Role="DIR_DESPACHO">
+              <PropertyRef Name="ID_COMUNA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROVE_COM_FK">
+          <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="1" />
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMUNA">
+              <PropertyRef Name="ID_COMUNA" />
+            </Principal>
+            <Dependent Role="PROVEEDOR">
+              <PropertyRef Name="ID_COMUNA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_COMUNA_FK">
+          <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMUNA">
+              <PropertyRef Name="ID_COMUNA" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_COMUNA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CREDENCIAL_ESTADO_FK">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="CREDENCIAL" Type="Self.CREDENCIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_STS" />
+            </Principal>
+            <Dependent Role="CREDENCIAL">
+              <PropertyRef Name="ID_STS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CREDENCIAL_USUARIO_FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CREDENCIAL" Type="Self.CREDENCIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="RUT" />
+            </Principal>
+            <Dependent Role="CREDENCIAL">
+              <PropertyRef Name="RUT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DET_ORD_COMP_ORD_COMP_FK">
+          <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="1" />
+          <End Role="DET_ORD_COMP" Type="Self.DET_ORD_COMP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_COMPRA">
+              <PropertyRef Name="ID_ORDEN_COMPRA" />
+            </Principal>
+            <Dependent Role="DET_ORD_COMP">
+              <PropertyRef Name="ID_ORDEN_COMPRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DET_ORD_COMP_PROD_FK">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="DET_ORD_COMP" Type="Self.DET_ORD_COMP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="COD_PRODUCTO" />
+            </Principal>
+            <Dependent Role="DET_ORD_COMP">
+              <PropertyRef Name="COD_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DET_VEN_PRODU_FK">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="COD_PRODUCTO" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="COD_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DET_VEN_VEN_FK">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1" />
+          <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="COD_VENTA" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="COD_VENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DIR_DES_CLI_DIR_DESP_FK">
+          <End Role="DIR_DESPACHO" Type="Self.DIR_DESPACHO" Multiplicity="1" />
+          <End Role="DIR_DES_CLI" Type="Self.DIR_DES_CLI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIR_DESPACHO">
+              <PropertyRef Name="COD_DIR" />
+            </Principal>
+            <Dependent Role="DIR_DES_CLI">
+              <PropertyRef Name="COD_DIR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DIR_DES_CLI_US_FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="DIR_DES_CLI" Type="Self.DIR_DES_CLI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="RUT" />
+            </Principal>
+            <Dependent Role="DIR_DES_CLI">
+              <PropertyRef Name="RUT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VEN_DIR_DESP_FK">
+          <End Role="DIR_DESPACHO" Type="Self.DIR_DESPACHO" Multiplicity="0..1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIR_DESPACHO">
+              <PropertyRef Name="COD_DIR" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="COD_DIR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPRESA_ESTADO_FK">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_STS" />
+            </Principal>
+            <Dependent Role="EMPRESA">
+              <PropertyRef Name="ID_STS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCTO_EMPRESA_FK">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="RUT_EMP" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="RUT_EMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_EMPRESA_FK">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="RUT_EMP" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="RUT_EMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VEN_EMPR_FK">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="RUT_EMP" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="RUT_EMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCTO_ESTADO_FK">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_STS" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ID_STS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROMOCION_ESTADO_FK">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="PROMOCION" Type="Self.PROMOCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_STS" />
+            </Principal>
+            <Dependent Role="PROMOCION">
+              <PropertyRef Name="ID_STS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROVE_EST_FK">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_STS" />
+            </Principal>
+            <Dependent Role="PROVEEDOR">
+              <PropertyRef Name="ID_STS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_ESTADO_FK">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_STS" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_STS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TIP_PROD_FAM_PROD_FK">
+          <End Role="FAMILIA_PRODUCTO" Type="Self.FAMILIA_PRODUCTO" Multiplicity="1" />
+          <End Role="TIPO_PRODUCTO" Type="Self.TIPO_PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FAMILIA_PRODUCTO">
+              <PropertyRef Name="ID_FAM_PRO" />
+            </Principal>
+            <Dependent Role="TIPO_PRODUCTO">
+              <PropertyRef Name="ID_FAM_PRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_GENERO_FK">
+          <End Role="GENERO" Type="Self.GENERO" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENERO">
+              <PropertyRef Name="ID_GENERO" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_GENERO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCTO_PROMOCION_FK">
+          <End Role="PROMOCION" Type="Self.PROMOCION" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROMOCION">
+              <PropertyRef Name="ID_PROMO" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ID_PROMO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCTO_PROVEEDOR_FK">
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCTO_TIPO_PRODUCTO_FK">
+          <End Role="TIPO_PRODUCTO" Type="Self.TIPO_PRODUCTO" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PRODUCTO">
+              <PropertyRef Name="ID_TIP_PROD" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ID_TIP_PROD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROVE_RUB_FK">
+          <End Role="RUBRO" Type="Self.RUBRO" Multiplicity="1" />
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RUBRO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Principal>
+            <Dependent Role="PROVEEDOR">
+              <PropertyRef Name="ID_RUBRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_RUBRO_FK">
+          <End Role="RUBRO" Type="Self.RUBRO" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RUBRO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VEN_TIP_COMPR_FK">
+          <End Role="TIPO_COMPROBANTE" Type="Self.TIPO_COMPROBANTE" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_COMPROBANTE">
+              <PropertyRef Name="ID_TIP_COMPR" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="ID_TIP_COMPR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VEN_TIP_ENT_FK">
+          <End Role="TIPO_ENTREGA" Type="Self.TIPO_ENTREGA" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_ENTREGA">
+              <PropertyRef Name="ID_TIP_ENTREGA" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="ID_TIP_ENTREGA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VEN_TIP_MON_FK">
+          <End Role="TIPO_MONEDA" Type="Self.TIPO_MONEDA" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_MONEDA">
+              <PropertyRef Name="ID_TIP_MONEY" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="ID_TIP_MONEY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VENT_TIP_PAGO_TIPO_PAGO_FK">
+          <End Role="TIPO_PAGO" Type="Self.TIPO_PAGO" Multiplicity="1" />
+          <End Role="VENT_TIP_PAGO" Type="Self.VENT_TIP_PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PAGO">
+              <PropertyRef Name="ID_TIP_PAGO" />
+            </Principal>
+            <Dependent Role="VENT_TIP_PAGO">
+              <PropertyRef Name="ID_TIP_PAGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_TIPO_USUARIO_FK">
+          <End Role="TIPO_USUARIO" Type="Self.TIPO_USUARIO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_USUARIO">
+              <PropertyRef Name="ID_TIP_USER" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_TIP_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_VEN_US_FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="USUARIO_VENTA" Type="Self.USUARIO_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="RUT" />
+            </Principal>
+            <Dependent Role="USUARIO_VENTA">
+              <PropertyRef Name="RUT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="US_VEN_VEN_FK">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1" />
+          <End Role="USUARIO_VENTA" Type="Self.USUARIO_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="COD_VENTA" />
+            </Principal>
+            <Dependent Role="USUARIO_VENTA">
+              <PropertyRef Name="COD_VENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VENT_TIP_PAGO_VENTA_FK">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1" />
+          <End Role="VENT_TIP_PAGO" Type="Self.VENT_TIP_PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="COD_VENTA" />
+            </Principal>
+            <Dependent Role="VENT_TIP_PAGO">
+              <PropertyRef Name="COD_VENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CARGO" EntityType="Self.CARGO" />
+          <EntitySet Name="CIUDAD" EntityType="Self.CIUDAD" />
+          <EntitySet Name="COMUNA" EntityType="Self.COMUNA" />
+          <EntitySet Name="CREDENCIAL" EntityType="Self.CREDENCIAL" />
+          <EntitySet Name="DET_ORD_COMP" EntityType="Self.DET_ORD_COMP" />
+          <EntitySet Name="DETALLE_VENTA" EntityType="Self.DETALLE_VENTA" />
+          <EntitySet Name="DIR_DES_CLI" EntityType="Self.DIR_DES_CLI" />
+          <EntitySet Name="DIR_DESPACHO" EntityType="Self.DIR_DESPACHO" />
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" />
+          <EntitySet Name="ESTADO" EntityType="Self.ESTADO" />
+          <EntitySet Name="FAMILIA_PRODUCTO" EntityType="Self.FAMILIA_PRODUCTO" />
+          <EntitySet Name="GENERO" EntityType="Self.GENERO" />
+          <EntitySet Name="ORDEN_COMPRA" EntityType="Self.ORDEN_COMPRA" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" />
+          <EntitySet Name="PROMOCION" EntityType="Self.PROMOCION" />
+          <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" />
+          <EntitySet Name="REGION" EntityType="Self.REGION" />
+          <EntitySet Name="RUBRO" EntityType="Self.RUBRO" />
+          <EntitySet Name="TIPO_COMPROBANTE" EntityType="Self.TIPO_COMPROBANTE" />
+          <EntitySet Name="TIPO_ENTREGA" EntityType="Self.TIPO_ENTREGA" />
+          <EntitySet Name="TIPO_MONEDA" EntityType="Self.TIPO_MONEDA" />
+          <EntitySet Name="TIPO_PAGO" EntityType="Self.TIPO_PAGO" />
+          <EntitySet Name="TIPO_PRODUCTO" EntityType="Self.TIPO_PRODUCTO" />
+          <EntitySet Name="TIPO_USUARIO" EntityType="Self.TIPO_USUARIO" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <EntitySet Name="USUARIO_VENTA" EntityType="Self.USUARIO_VENTA" />
+          <EntitySet Name="VENT_TIP_PAGO" EntityType="Self.VENT_TIP_PAGO" />
+          <EntitySet Name="VENTA" EntityType="Self.VENTA" />
+          <AssociationSet Name="US_CARGO_FK" Association="Self.US_CARGO_FK">
+            <End Role="CARGO" EntitySet="CARGO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="CIU_REG_FK" Association="Self.CIU_REG_FK">
+            <End Role="REGION" EntitySet="REGION" />
+            <End Role="CIUDAD" EntitySet="CIUDAD" />
+          </AssociationSet>
+          <AssociationSet Name="COMU_CIUD_FK" Association="Self.COMU_CIUD_FK">
+            <End Role="CIUDAD" EntitySet="CIUDAD" />
+            <End Role="COMUNA" EntitySet="COMUNA" />
+          </AssociationSet>
+          <AssociationSet Name="DIR_DESPACHO_COMUNA_FK" Association="Self.DIR_DESPACHO_COMUNA_FK">
+            <End Role="COMUNA" EntitySet="COMUNA" />
+            <End Role="DIR_DESPACHO" EntitySet="DIR_DESPACHO" />
+          </AssociationSet>
+          <AssociationSet Name="PROVE_COM_FK" Association="Self.PROVE_COM_FK">
+            <End Role="COMUNA" EntitySet="COMUNA" />
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="US_COMUNA_FK" Association="Self.US_COMUNA_FK">
+            <End Role="COMUNA" EntitySet="COMUNA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="CREDENCIAL_ESTADO_FK" Association="Self.CREDENCIAL_ESTADO_FK">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="CREDENCIAL" EntitySet="CREDENCIAL" />
+          </AssociationSet>
+          <AssociationSet Name="CREDENCIAL_USUARIO_FK" Association="Self.CREDENCIAL_USUARIO_FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CREDENCIAL" EntitySet="CREDENCIAL" />
+          </AssociationSet>
+          <AssociationSet Name="DET_ORD_COMP_ORD_COMP_FK" Association="Self.DET_ORD_COMP_ORD_COMP_FK">
+            <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+            <End Role="DET_ORD_COMP" EntitySet="DET_ORD_COMP" />
+          </AssociationSet>
+          <AssociationSet Name="DET_ORD_COMP_PROD_FK" Association="Self.DET_ORD_COMP_PROD_FK">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="DET_ORD_COMP" EntitySet="DET_ORD_COMP" />
+          </AssociationSet>
+          <AssociationSet Name="DET_VEN_PRODU_FK" Association="Self.DET_VEN_PRODU_FK">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="DET_VEN_VEN_FK" Association="Self.DET_VEN_VEN_FK">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="DIR_DES_CLI_DIR_DESP_FK" Association="Self.DIR_DES_CLI_DIR_DESP_FK">
+            <End Role="DIR_DESPACHO" EntitySet="DIR_DESPACHO" />
+            <End Role="DIR_DES_CLI" EntitySet="DIR_DES_CLI" />
+          </AssociationSet>
+          <AssociationSet Name="DIR_DES_CLI_US_FK" Association="Self.DIR_DES_CLI_US_FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="DIR_DES_CLI" EntitySet="DIR_DES_CLI" />
+          </AssociationSet>
+          <AssociationSet Name="VEN_DIR_DESP_FK" Association="Self.VEN_DIR_DESP_FK">
+            <End Role="DIR_DESPACHO" EntitySet="DIR_DESPACHO" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="EMPRESA_ESTADO_FK" Association="Self.EMPRESA_ESTADO_FK">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCTO_EMPRESA_FK" Association="Self.PRODUCTO_EMPRESA_FK">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="US_EMPRESA_FK" Association="Self.US_EMPRESA_FK">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="VEN_EMPR_FK" Association="Self.VEN_EMPR_FK">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCTO_ESTADO_FK" Association="Self.PRODUCTO_ESTADO_FK">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="PROMOCION_ESTADO_FK" Association="Self.PROMOCION_ESTADO_FK">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="PROMOCION" EntitySet="PROMOCION" />
+          </AssociationSet>
+          <AssociationSet Name="PROVE_EST_FK" Association="Self.PROVE_EST_FK">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="US_ESTADO_FK" Association="Self.US_ESTADO_FK">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="TIP_PROD_FAM_PROD_FK" Association="Self.TIP_PROD_FAM_PROD_FK">
+            <End Role="FAMILIA_PRODUCTO" EntitySet="FAMILIA_PRODUCTO" />
+            <End Role="TIPO_PRODUCTO" EntitySet="TIPO_PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="US_GENERO_FK" Association="Self.US_GENERO_FK">
+            <End Role="GENERO" EntitySet="GENERO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCTO_PROMOCION_FK" Association="Self.PRODUCTO_PROMOCION_FK">
+            <End Role="PROMOCION" EntitySet="PROMOCION" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCTO_PROVEEDOR_FK" Association="Self.PRODUCTO_PROVEEDOR_FK">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCTO_TIPO_PRODUCTO_FK" Association="Self.PRODUCTO_TIPO_PRODUCTO_FK">
+            <End Role="TIPO_PRODUCTO" EntitySet="TIPO_PRODUCTO" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="PROVE_RUB_FK" Association="Self.PROVE_RUB_FK">
+            <End Role="RUBRO" EntitySet="RUBRO" />
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="US_RUBRO_FK" Association="Self.US_RUBRO_FK">
+            <End Role="RUBRO" EntitySet="RUBRO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="VEN_TIP_COMPR_FK" Association="Self.VEN_TIP_COMPR_FK">
+            <End Role="TIPO_COMPROBANTE" EntitySet="TIPO_COMPROBANTE" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="VEN_TIP_ENT_FK" Association="Self.VEN_TIP_ENT_FK">
+            <End Role="TIPO_ENTREGA" EntitySet="TIPO_ENTREGA" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="VEN_TIP_MON_FK" Association="Self.VEN_TIP_MON_FK">
+            <End Role="TIPO_MONEDA" EntitySet="TIPO_MONEDA" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="VENT_TIP_PAGO_TIPO_PAGO_FK" Association="Self.VENT_TIP_PAGO_TIPO_PAGO_FK">
+            <End Role="TIPO_PAGO" EntitySet="TIPO_PAGO" />
+            <End Role="VENT_TIP_PAGO" EntitySet="VENT_TIP_PAGO" />
+          </AssociationSet>
+          <AssociationSet Name="US_TIPO_USUARIO_FK" Association="Self.US_TIPO_USUARIO_FK">
+            <End Role="TIPO_USUARIO" EntitySet="TIPO_USUARIO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="US_VEN_US_FK" Association="Self.US_VEN_US_FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="USUARIO_VENTA" EntitySet="USUARIO_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="US_VEN_VEN_FK" Association="Self.US_VEN_VEN_FK">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="USUARIO_VENTA" EntitySet="USUARIO_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="VENT_TIP_PAGO_VENTA_FK" Association="Self.VENT_TIP_PAGO_VENTA_FK">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="VENT_TIP_PAGO" EntitySet="VENT_TIP_PAGO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="CARGO">
+            <EntityTypeMapping TypeName="Model.CARGO">
+              <MappingFragment StoreEntitySet="CARGO">
+                <ScalarProperty Name="COD_CARGO" ColumnName="COD_CARGO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CIUDAD">
+            <EntityTypeMapping TypeName="Model.CIUDAD">
+              <MappingFragment StoreEntitySet="CIUDAD">
+                <ScalarProperty Name="ID_CIUDAD" ColumnName="ID_CIUDAD" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID_REGION" ColumnName="ID_REGION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMUNA">
+            <EntityTypeMapping TypeName="Model.COMUNA">
+              <MappingFragment StoreEntitySet="COMUNA">
+                <ScalarProperty Name="ID_COMUNA" ColumnName="ID_COMUNA" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID_CIUDAD" ColumnName="ID_CIUDAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CREDENCIAL">
+            <EntityTypeMapping TypeName="Model.CREDENCIAL">
+              <MappingFragment StoreEntitySet="CREDENCIAL">
+                <ScalarProperty Name="ID_CREDENCIAL" ColumnName="ID_CREDENCIAL" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="FEC_CADUCIDAD" ColumnName="FEC_CADUCIDAD" />
+                <ScalarProperty Name="ID_STS" ColumnName="ID_STS" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DET_ORD_COMP">
+            <EntityTypeMapping TypeName="Model.DET_ORD_COMP">
+              <MappingFragment StoreEntitySet="DET_ORD_COMP">
+                <ScalarProperty Name="ID_DET_ORD_COMP" ColumnName="ID_DET_ORD_COMP" />
+                <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
+                <ScalarProperty Name="ID_ORDEN_COMPRA" ColumnName="ID_ORDEN_COMPRA" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_VENTA">
+            <EntityTypeMapping TypeName="Model.DETALLE_VENTA">
+              <MappingFragment StoreEntitySet="DETALLE_VENTA">
+                <ScalarProperty Name="ID_DET_VENT" ColumnName="ID_DET_VENT" />
+                <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
+                <ScalarProperty Name="COD_VENTA" ColumnName="COD_VENTA" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIR_DES_CLI">
+            <EntityTypeMapping TypeName="Model.DIR_DES_CLI">
+              <MappingFragment StoreEntitySet="DIR_DES_CLI">
+                <ScalarProperty Name="ID_DES" ColumnName="ID_DES" />
+                <ScalarProperty Name="COD_DIR" ColumnName="COD_DIR" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIR_DESPACHO">
+            <EntityTypeMapping TypeName="Model.DIR_DESPACHO">
+              <MappingFragment StoreEntitySet="DIR_DESPACHO">
+                <ScalarProperty Name="COD_DIR" ColumnName="COD_DIR" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID_COMUNA" ColumnName="ID_COMUNA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPRESA">
+            <EntityTypeMapping TypeName="Model.EMPRESA">
+              <MappingFragment StoreEntitySet="EMPRESA">
+                <ScalarProperty Name="RUT_EMP" ColumnName="RUT_EMP" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="RAZON_SOCIAL" ColumnName="RAZON_SOCIAL" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="ID_STS" ColumnName="ID_STS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADO">
+            <EntityTypeMapping TypeName="Model.ESTADO">
+              <MappingFragment StoreEntitySet="ESTADO">
+                <ScalarProperty Name="ID_STS" ColumnName="ID_STS" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAMILIA_PRODUCTO">
+            <EntityTypeMapping TypeName="Model.FAMILIA_PRODUCTO">
+              <MappingFragment StoreEntitySet="FAMILIA_PRODUCTO">
+                <ScalarProperty Name="ID_FAM_PRO" ColumnName="ID_FAM_PRO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GENERO">
+            <EntityTypeMapping TypeName="Model.GENERO">
+              <MappingFragment StoreEntitySet="GENERO">
+                <ScalarProperty Name="ID_GENERO" ColumnName="ID_GENERO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDEN_COMPRA">
+            <EntityTypeMapping TypeName="Model.ORDEN_COMPRA">
+              <MappingFragment StoreEntitySet="ORDEN_COMPRA">
+                <ScalarProperty Name="ID_ORDEN_COMPRA" ColumnName="ID_ORDEN_COMPRA" />
+                <ScalarProperty Name="FEC_EMISION" ColumnName="FEC_EMISION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO">
+            <EntityTypeMapping TypeName="Model.PRODUCTO">
+              <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="FEC_VENCIMIENTO" ColumnName="FEC_VENCIMIENTO" />
+                <ScalarProperty Name="STOCK" ColumnName="STOCK" />
+                <ScalarProperty Name="STOCK_CRITICO" ColumnName="STOCK_CRITICO" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="IMAGEN" ColumnName="IMAGEN" />
+                <ScalarProperty Name="ID_TIP_PROD" ColumnName="ID_TIP_PROD" />
+                <ScalarProperty Name="RUT_EMP" ColumnName="RUT_EMP" />
+                <ScalarProperty Name="ID_STS" ColumnName="ID_STS" />
+                <ScalarProperty Name="ID_PROVEEDOR" ColumnName="ID_PROVEEDOR" />
+                <ScalarProperty Name="ID_PROMO" ColumnName="ID_PROMO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROMOCION">
+            <EntityTypeMapping TypeName="Model.PROMOCION">
+              <MappingFragment StoreEntitySet="PROMOCION">
+                <ScalarProperty Name="ID_PROMO" ColumnName="ID_PROMO" />
+                <ScalarProperty Name="NAME_PROMO" ColumnName="NAME_PROMO" />
+                <ScalarProperty Name="FEC_INICIO" ColumnName="FEC_INICIO" />
+                <ScalarProperty Name="FEC_TERMINO" ColumnName="FEC_TERMINO" />
+                <ScalarProperty Name="PORC_DESC" ColumnName="PORC_DESC" />
+                <ScalarProperty Name="MONTO_PROMO" ColumnName="MONTO_PROMO" />
+                <ScalarProperty Name="ID_STS" ColumnName="ID_STS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROVEEDOR">
+            <EntityTypeMapping TypeName="Model.PROVEEDOR">
+              <MappingFragment StoreEntitySet="PROVEEDOR">
+                <ScalarProperty Name="ID_PROVEEDOR" ColumnName="ID_PROVEEDOR" />
+                <ScalarProperty Name="RUT_PROVEEDOR" ColumnName="RUT_PROVEEDOR" />
+                <ScalarProperty Name="RAZON_SOCIAL" ColumnName="RAZON_SOCIAL" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CELULAR" ColumnName="CELULAR" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="ID_COMUNA" ColumnName="ID_COMUNA" />
+                <ScalarProperty Name="ID_STS" ColumnName="ID_STS" />
+                <ScalarProperty Name="ID_RUBRO" ColumnName="ID_RUBRO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REGION">
+            <EntityTypeMapping TypeName="Model.REGION">
+              <MappingFragment StoreEntitySet="REGION">
+                <ScalarProperty Name="ID_REGION" ColumnName="ID_REGION" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RUBRO">
+            <EntityTypeMapping TypeName="Model.RUBRO">
+              <MappingFragment StoreEntitySet="RUBRO">
+                <ScalarProperty Name="ID_RUBRO" ColumnName="ID_RUBRO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_COMPROBANTE">
+            <EntityTypeMapping TypeName="Model.TIPO_COMPROBANTE">
+              <MappingFragment StoreEntitySet="TIPO_COMPROBANTE">
+                <ScalarProperty Name="ID_TIP_COMPR" ColumnName="ID_TIP_COMPR" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_ENTREGA">
+            <EntityTypeMapping TypeName="Model.TIPO_ENTREGA">
+              <MappingFragment StoreEntitySet="TIPO_ENTREGA">
+                <ScalarProperty Name="ID_TIP_ENTREGA" ColumnName="ID_TIP_ENTREGA" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_MONEDA">
+            <EntityTypeMapping TypeName="Model.TIPO_MONEDA">
+              <MappingFragment StoreEntitySet="TIPO_MONEDA">
+                <ScalarProperty Name="ID_TIP_MONEY" ColumnName="ID_TIP_MONEY" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="VALOR_PESO_CL" ColumnName="VALOR_PESO_CL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_PAGO">
+            <EntityTypeMapping TypeName="Model.TIPO_PAGO">
+              <MappingFragment StoreEntitySet="TIPO_PAGO">
+                <ScalarProperty Name="ID_TIP_PAGO" ColumnName="ID_TIP_PAGO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_PRODUCTO">
+            <EntityTypeMapping TypeName="Model.TIPO_PRODUCTO">
+              <MappingFragment StoreEntitySet="TIPO_PRODUCTO">
+                <ScalarProperty Name="ID_TIP_PROD" ColumnName="ID_TIP_PROD" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID_FAM_PRO" ColumnName="ID_FAM_PRO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_USUARIO">
+            <EntityTypeMapping TypeName="Model.TIPO_USUARIO">
+              <MappingFragment StoreEntitySet="TIPO_USUARIO">
+                <ScalarProperty Name="ID_TIP_USER" ColumnName="ID_TIP_USER" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="Model.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="NOMBRE_COMPLETO" ColumnName="NOMBRE_COMPLETO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="RAZON_SOCIAL" ColumnName="RAZON_SOCIAL" />
+                <ScalarProperty Name="FEC_NAC" ColumnName="FEC_NAC" />
+                <ScalarProperty Name="FEC_CONTRATO" ColumnName="FEC_CONTRATO" />
+                <ScalarProperty Name="SUELDO" ColumnName="SUELDO" />
+                <ScalarProperty Name="ID_COMUNA" ColumnName="ID_COMUNA" />
+                <ScalarProperty Name="RUT_EMP" ColumnName="RUT_EMP" />
+                <ScalarProperty Name="ID_STS" ColumnName="ID_STS" />
+                <ScalarProperty Name="ID_RUBRO" ColumnName="ID_RUBRO" />
+                <ScalarProperty Name="ID_GENERO" ColumnName="ID_GENERO" />
+                <ScalarProperty Name="COD_CARGO" ColumnName="COD_CARGO" />
+                <ScalarProperty Name="ID_TIP_USER" ColumnName="ID_TIP_USER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO_VENTA">
+            <EntityTypeMapping TypeName="Model.USUARIO_VENTA">
+              <MappingFragment StoreEntitySet="USUARIO_VENTA">
+                <ScalarProperty Name="ID_US_VEN" ColumnName="ID_US_VEN" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="COD_VENTA" ColumnName="COD_VENTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENT_TIP_PAGO">
+            <EntityTypeMapping TypeName="Model.VENT_TIP_PAGO">
+              <MappingFragment StoreEntitySet="VENT_TIP_PAGO">
+                <ScalarProperty Name="ID_V_TIP_PAGO" ColumnName="ID_V_TIP_PAGO" />
+                <ScalarProperty Name="COD_VENTA" ColumnName="COD_VENTA" />
+                <ScalarProperty Name="ID_TIP_PAGO" ColumnName="ID_TIP_PAGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTA">
+            <EntityTypeMapping TypeName="Model.VENTA">
+              <MappingFragment StoreEntitySet="VENTA">
+                <ScalarProperty Name="COD_VENTA" ColumnName="COD_VENTA" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="FEC_VENTA" ColumnName="FEC_VENTA" />
+                <ScalarProperty Name="ID_TIP_ENTREGA" ColumnName="ID_TIP_ENTREGA" />
+                <ScalarProperty Name="ID_TIP_COMPR" ColumnName="ID_TIP_COMPR" />
+                <ScalarProperty Name="ID_TIP_MONEY" ColumnName="ID_TIP_MONEY" />
+                <ScalarProperty Name="RUT_EMP" ColumnName="RUT_EMP" />
+                <ScalarProperty Name="COD_DIR" ColumnName="COD_DIR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
